@@ -10,11 +10,11 @@ import (
 )
 
 func main() {
-	// Initialiser les couleurs
+	// Init colors
 	red := color.FgRed.Render
 	green := color.FgGreen.Render
 
-	// Boucle infinie pour surveiller l'utilisation du CPU
+	// Infinit loop for monitoring
 	for {
 		byCPUs, err := cpu.Percent(time.Second, true)
 		if err != nil {
@@ -26,10 +26,9 @@ func main() {
 			log.Fatal("Error in getting CPUS data: ", err)
 		}
 
-		// Effacer l'affichage précédent en utilisant le caractère de retour à la ligne (\r)
+		// Remove previous line with (\r)
 		fmt.Print("\033[H\033[2J")
 
-		// Afficher le tableau avec les couleurs
 		fmt.Println("========== Utilisation du CPU ==========")
 		for i, c := range byCPUs {
 			fmt.Printf("CPU %v: %s\n", i, getColoredValue(c, red, green))
@@ -37,16 +36,12 @@ func main() {
 		fmt.Println("========== Utilisation total des CPU ==========")
 		fmt.Printf("CPU in use: %s\n", getColoredValue(allCPUs[0], red, green))
 
-		//fmt.Printf("CPU 1: %s\n", getColoredValue(byCPUs[0], red, green))
-		//fmt.Printf("CPU 2: %s\n", getColoredValue(byCPUs[1], red, green))
-		// Ajoutez davantage de lignes pour afficher les autres cœurs du CPU
-
-		// Pause de 1 seconde avant de vérifier à nouveau l'utilisation du CPU
+		// Waiting 1 second before recast
 		time.Sleep(time.Second)
 	}
 }
 
-// Fonction utilitaire pour obtenir la valeur colorée en fonction du seuil
+// Utility function for change color based on used ressources
 func getColoredValue(value float64, colorLow, colorHigh func(a ...interface{}) string) string {
 	threshold := 80.0
 	if value > threshold {
