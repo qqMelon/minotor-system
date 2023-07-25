@@ -50,7 +50,7 @@ func main() {
 		fmt.Printf("CPU in use: %s\n", getColoredValue(allCPUs[0], green, red))
 
 		fmt.Println("========== Utilisation MEMORY ==========")
-		fmt.Printf("Memory in use: %v%%\n", getColoredValue(vm.UsedPercent, green, red))
+		fmt.Printf("Memory in use: %v \n", getColoredValue(vm.UsedPercent, green, red))
 
 		fmt.Println("========== Process PIDS ==========")
 		fmt.Printf("PIDS: %v\n", pid)
